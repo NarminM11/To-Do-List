@@ -29,34 +29,33 @@
 
 
  let addTodo = () => {
-        let todoText = document.getElementById('todo-text').value;
-        if(todoText != ''){
+        let todoText = document.getElementById('todo-text').value; // id-si todo-text olan elementi götürür
+        if(todoText != ''){ //boş deyilsə yaddaşa yazır
             setData(todoText);
-            listTodo(); 
+            listTodo(); //listi yenidən göstərmək üçün
         }
     }
 
 
         let setData = (item) => {
         if(getData(item) != false) {
-            alert("Item already added in todo");
-        }else{
-            let data = getData(); 
-            data = (data != false) ? data : []; 
-            data.push(item);
-            data = JSON.stringify(data);
+            alert("Item already added in todo"); //elave elediyimiz task artıq siyahıda varsa alert mesajı verir
+        }else{ //əgə yoxdursa
+            let data = getData(); //əvvəlki dataları alır
+            data = (data != false) ? data : []; //boş array
+            data.push(item); //həmin item-i dataya əlavə edir
+            data = JSON.stringify(data); //jsona
          
-            localStorage.setItem('mytodo',data);
+            localStorage.setItem('mytodo',data); //locala 
         }
     }
 
 
       let getData = (item = null) => {
-        let data = JSON.parse(localStorage.getItem('mytodo')); 
+        let data = JSON.parse(localStorage.getItem('mytodo')); //localdan mytodo datalarını alır və jsoana obyektinə çevirir
         if(data){
-
-            if(item) {
-                if(data.indexOf(item) != -1){
+            if(item) { //əgər item datası göndərlibsə
+                if(data.indexOf(item) != -1){ //
                     return data[item];
                 }else{
                     return false;
@@ -71,7 +70,7 @@
         let listTodo = () => {
         let html = ``;
         let data = getData(); 
-        if(data){
+        if(data){ //siyahi varsa
             html += `<ol>`;
             data.forEach((value,item
             ) => {
